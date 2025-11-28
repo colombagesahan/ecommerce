@@ -4,14 +4,15 @@ import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, onSnapshot, 
 
 // --- PASTE YOUR FIREBASE CONFIG HERE ---
 const firebaseConfig = {
-    apiKey: "AIzaSyBTResblUIHqhFah0XKiOEU37Hia4EuE4o",
-    authDomain: "ecommerce01-c2f45.firebaseapp.com",
-    projectId: "ecommerce01-c2f45",
-    storageBucket: "ecommerce01-c2f45.firebasestorage.app",
-    messagingSenderId: "922165563502",
-    appId: "1:922165563502:web:016b8cd334274f019c167f",
-    measurementId: "G-GSMV4413FT"
+  apiKey: "AIzaSyDBOTUu8txawnC0jrh8ctY1wzKWZkESKfg",
+  authDomain: "ecom02-b8310.firebaseapp.com",
+  projectId: "ecom02-b8310",
+  storageBucket: "ecom02-b8310.firebasestorage.app",
+  messagingSenderId: "1044224602906",
+  appId: "1:1044224602906:web:d8a2f362a6158fcf40f2a3",
+  measurementId: "G-R5SCHPHFQC"
 };
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
