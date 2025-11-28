@@ -3,120 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>Admin Panel</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-light">
 
-    <div class="d-flex">
+    <div class="d-flex" style="min-height: 100vh;">
         <!-- Sidebar -->
-        <div class="sidebar p-3 d-none d-md-block" style="width: 250px;">
-            <h4>Admin</h4>
-            <hr>
+        <div class="sidebar p-3 d-none d-md-block text-white bg-dark" style="width: 260px;">
+            <h4 class="mb-4">Admin Panel</h4>
             <ul class="nav flex-column nav-pills" id="adminTabs" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" data-bs-toggle="pill" href="#dashboard">Dashboard (Orders)</a>
+                <li class="nav-item mb-2">
+                    <a class="nav-link active" data-bs-toggle="pill" href="#dashboard">Orders</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="pill" href="#products">Manage Products</a>
+                <li class="nav-item mb-2">
+                    <a class="nav-link" data-bs-toggle="pill" href="#products">Products</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="pill" href="#site-settings">Site Builder</a>
+                <li class="nav-item mb-2">
+                    <a class="nav-link" data-bs-toggle="pill" href="#site-settings">Website Builder</a>
                 </li>
                 <li class="nav-item mt-5">
-                    <a class="nav-link bg-danger text-white" href="index.html">View Live Site</a>
+                    <a class="nav-link btn btn-outline-light text-start" href="index.html" target="_blank">View Live Store ↗</a>
                 </li>
             </ul>
         </div>
 
-        <!-- Main Content -->
-        <div class="container-fluid p-4">
-            <div class="tab-content">
-                
-                <!-- 1. Orders Tab -->
-                <div class="tab-pane fade show active" id="dashboard">
-                    <h2>Incoming Orders</h2>
-                    <div class="card shadow-sm">
-                        <div class="card-body">
-                            <table class="table table-striped">
-                                <thead><tr><th>Date</th><th>Customer</th><th>Items</th><th>Total</th></tr></thead>
-                                <tbody id="admin-order-list"></tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+        <!-- Mobile Sidebar Toggle (Visible only on small screens) -->
+        <div class="container-fluid p-0">
+            <nav class="navbar navbar-dark bg-dark d-md-none p-3">
+                <span class="navbar-brand">Admin</span>
+                <a href="index.html" class="btn btn-sm btn-light">Go to Store</a>
+            </nav>
 
-                <!-- 2. Products Tab -->
-                <div class="tab-pane fade" id="products">
-                    <h2>Manage Products</h2>
-                    <div class="row">
-                        <div class="col-md-4 mb-3">
-                            <div class="card p-3">
-                                <h5>Add New Product</h5>
-                                <form id="add-product-form">
-                                    <input type="text" id="prod-name" class="form-control mb-2" placeholder="Product Name" required>
-                                    <input type="number" id="prod-price" class="form-control mb-2" placeholder="Price (Rs)" required>
-                                    
-                                    <label>Product Image</label>
-                                    <input type="file" id="prod-file" class="form-control mb-2" accept="image/*">
-                                    <div id="upload-progress" class="progress mb-2 d-none" style="height: 5px;">
-                                        <div class="progress-bar" style="width: 0%"></div>
-                                    </div>
-
-                                    <button type="submit" class="btn btn-primary w-100">Add Product</button>
-                                </form>
+            <!-- Content Area -->
+            <div class="p-4">
+                <div class="tab-content">
+                    
+                    <!-- 1. Orders Tab -->
+                    <div class="tab-pane fade show active" id="dashboard">
+                        <h2 class="mb-3">Incoming Orders</h2>
+                        <div class="card shadow-sm">
+                            <div class="card-body table-responsive">
+                                <table class="table table-hover align-middle">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Customer Details</th>
+                                            <th>Items Ordered</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="admin-order-list">
+                                        <tr><td colspan="4" class="text-center">Loading orders...</td></tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        <div class="col-md-8">
-                            <div class="row" id="admin-product-list"></div>
+                    </div>
+
+                    <!-- 2. Products Tab -->
+                    <div class="tab-pane fade" id="products">
+                        <h2 class="mb-3">Manage Products</h2>
+                        <div class="row">
+                            <!-- Add Product Form -->
+                            <div class="col-lg-4 mb-4">
+                                <div class="card p-3 shadow-sm border-0">
+                                    <h5 class="card-title mb-3">Add New Product</h5>
+                                    <form id="add-product-form">
+                                        <div class="mb-2">
+                                            <label class="form-label text-muted small">Product Name</label>
+                                            <input type="text" id="prod-name" class="form-control" placeholder="e.g. Wooden Chair" required>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label class="form-label text-muted small">Price (LKR)</label>
+                                            <input type="number" id="prod-price" class="form-control" placeholder="e.g. 5000" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label text-muted small">Image Link (URL)</label>
+                                            <input type="url" id="prod-img" class="form-control" placeholder="https://..." required>
+                                            <div class="form-text">Right-click an image on Google > "Copy Image Address"</div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary w-100">Add Product</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- Product List -->
+                            <div class="col-lg-8">
+                                <div class="row g-3" id="admin-product-list"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- 3. Site Builder Tab -->
-                <div class="tab-pane fade" id="site-settings">
-                    <h2>Website Customization</h2>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="card p-4 mb-3">
-                                <h5>General Settings</h5>
-                                <form id="settings-form">
-                                    <label>Store Name</label>
-                                    <input type="text" id="conf-name" class="form-control mb-2">
-                                    
-                                    <label>Brand Color (Navbar/Buttons)</label>
-                                    <input type="color" id="conf-color" class="form-control form-control-color mb-2" value="#0d6efd">
-                                    
-                                    <label>Footer Text</label>
-                                    <input type="text" id="conf-footer" class="form-control mb-2">
-                                    
+                    <!-- 3. Site Builder Tab -->
+                    <div class="tab-pane fade" id="site-settings">
+                        <h2 class="mb-3">Website Customization</h2>
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <div class="card p-4 shadow-sm border-0">
+                                    <h5 class="mb-3">Theme & Content</h5>
+                                    <form id="settings-form">
+                                        <label class="form-label">Store Name</label>
+                                        <input type="text" id="conf-name" class="form-control mb-2">
+                                        
+                                        <label class="form-label">Brand Color</label>
+                                        <input type="color" id="conf-color" class="form-control form-control-color mb-2" value="#0d6efd" title="Choose your color">
+                                        
+                                        <label class="form-label">Footer Text</label>
+                                        <input type="text" id="conf-footer" class="form-control mb-3">
+                                        
+                                        <hr>
+                                        <h6 class="text-muted">Hero Banner</h6>
+                                        <label class="small">Main Title</label>
+                                        <input type="text" id="conf-hero-title" class="form-control mb-2">
+                                        <label class="small">Subtitle</label>
+                                        <input type="text" id="conf-hero-sub" class="form-control mb-3">
+
+                                        <button type="submit" class="btn btn-success w-100">Save Changes</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="card p-4 shadow-sm border-0">
+                                    <h5 class="mb-3">Add Information Section</h5>
+                                    <form id="add-section-form" class="mb-3">
+                                        <input type="text" id="sec-title" class="form-control mb-2" placeholder="Title (e.g. About Us)">
+                                        <textarea id="sec-content" class="form-control mb-2" rows="3" placeholder="Content..."></textarea>
+                                        <button type="submit" class="btn btn-secondary w-100">Add Section</button>
+                                    </form>
                                     <hr>
-                                    <h5>Hero Section</h5>
-                                    <input type="text" id="conf-hero-title" class="form-control mb-2" placeholder="Main Title">
-                                    <input type="text" id="conf-hero-sub" class="form-control mb-2" placeholder="Subtitle">
-
-                                    <button type="submit" class="btn btn-success mt-3">Save Changes</button>
-                                </form>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="card p-4">
-                                <h5>Add Extra Text Section</h5>
-                                <form id="add-section-form">
-                                    <input type="text" id="sec-title" class="form-control mb-2" placeholder="Section Title (e.g. About Us)">
-                                    <textarea id="sec-content" class="form-control mb-2" rows="3" placeholder="Content..."></textarea>
-                                    <button type="submit" class="btn btn-secondary">Add Section</button>
-                                </form>
-                                <hr>
-                                <h6>Existing Sections:</h6>
-                                <ul id="admin-sections-list" class="list-group"></ul>
+                                    <h6 class="text-muted">Current Sections:</h6>
+                                    <ul id="admin-sections-list" class="list-group"></ul>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
     </div>
