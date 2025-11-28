@@ -4,12 +4,13 @@ import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, onSnapshot, 
 
 // --- PASTE YOUR FIREBASE CONFIG HERE ---
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT.appspot.com",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID"
+    apiKey: "AIzaSyBTResblUIHqhFah0XKiOEU37Hia4EuE4o",
+    authDomain: "ecommerce01-c2f45.firebaseapp.com",
+    projectId: "ecommerce01-c2f45",
+    storageBucket: "ecommerce01-c2f45.firebasestorage.app",
+    messagingSenderId: "922165563502",
+    appId: "1:922165563502:web:016b8cd334274f019c167f",
+    measurementId: "G-GSMV4413FT"
 };
 
 // Initialize Firebase
