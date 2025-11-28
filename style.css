@@ -1,50 +1,42 @@
 :root {
-    --primary-color: #0d6efd; /* Default Blue */
+    --primary-color: #0d6efd; /* Default Blue, changed via Admin */
     --bg-color: #f8f9fa;
     --text-color: #212529;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', system-ui, sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
 }
 
-.navbar {
-    background-color: var(--primary-color) !important;
-}
+/* Dynamic Colors */
+.navbar { background-color: var(--primary-color) !important; }
+.btn-primary { background-color: var(--primary-color); border-color: var(--primary-color); }
+.text-primary { color: var(--primary-color) !important; }
 
-.btn-primary {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-}
-
+/* Product Cards */
+.card { transition: 0.3s; }
+.card:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
 .product-img {
-    height: 250px;
+    height: 200px;
     object-fit: cover;
     width: 100%;
+    background-color: #eee;
 }
 
+/* Hero Section */
 .hero-section {
-    background-color: #e9ecef;
-    padding: 60px 0;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1500&q=80');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 80px 20px;
     text-align: center;
     margin-bottom: 30px;
 }
 
-/* Admin Sidebar */
-.sidebar {
-    min-height: 100vh;
-    background: #343a40;
-    color: white;
-}
-.sidebar a {
-    color: #ccc;
-    text-decoration: none;
-    display: block;
-    padding: 10px;
-}
-.sidebar a:hover, .sidebar a.active {
-    background: #495057;
-    color: white;
-}
+/* Sidebar for Admin */
+.sidebar .nav-link { color: rgba(255,255,255,0.8); cursor: pointer; }
+.sidebar .nav-link.active { background-color: var(--primary-color); color: white; }
+.sidebar .nav-link:hover { color: white; background-color: rgba(255,255,255,0.1); }
