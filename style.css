@@ -1,17 +1,50 @@
-body { font-family: sans-serif; }
-.card-img-top {
-    height: 200px;
+:root {
+    --primary-color: #0d6efd; /* Default Blue */
+    --bg-color: #f8f9fa;
+    --text-color: #212529;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.navbar {
+    background-color: var(--primary-color) !important;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.product-img {
+    height: 250px;
     object-fit: cover;
+    width: 100%;
 }
-.product-card {
-    transition: transform 0.2s;
+
+.hero-section {
+    background-color: #e9ecef;
+    padding: 60px 0;
+    text-align: center;
+    margin-bottom: 30px;
 }
-.product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+
+/* Admin Sidebar */
+.sidebar {
+    min-height: 100vh;
+    background: #343a40;
+    color: white;
 }
-.table img {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
+.sidebar a {
+    color: #ccc;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+}
+.sidebar a:hover, .sidebar a.active {
+    background: #495057;
+    color: white;
 }
