@@ -9,67 +9,114 @@
 </head>
 <body class="bg-light">
 
-    <nav class="navbar navbar-dark bg-primary mb-4">
-        <div class="container">
-            <span class="navbar-brand">Admin Dashboard</span>
-            <a href="index.html" class="btn btn-light btn-sm">Go to Store</a>
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <div class="sidebar p-3 d-none d-md-block" style="width: 250px;">
+            <h4>Admin</h4>
+            <hr>
+            <ul class="nav flex-column nav-pills" id="adminTabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-bs-toggle="pill" href="#dashboard">Dashboard (Orders)</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="pill" href="#products">Manage Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="pill" href="#site-settings">Site Builder</a>
+                </li>
+                <li class="nav-item mt-5">
+                    <a class="nav-link bg-danger text-white" href="index.html">View Live Site</a>
+                </li>
+            </ul>
         </div>
-    </nav>
 
-    <div class="container">
-        <div class="row">
-            <!-- Add Product Section -->
-            <div class="col-md-4">
-                <div class="card p-3 mb-4">
-                    <h4>Add Product</h4>
-                    <form id="add-product-form">
-                        <div class="mb-2">
-                            <label>Product Name</label>
-                            <input type="text" id="prod-name" class="form-control" required>
+        <!-- Main Content -->
+        <div class="container-fluid p-4">
+            <div class="tab-content">
+                
+                <!-- 1. Orders Tab -->
+                <div class="tab-pane fade show active" id="dashboard">
+                    <h2>Incoming Orders</h2>
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead><tr><th>Date</th><th>Customer</th><th>Items</th><th>Total</th></tr></thead>
+                                <tbody id="admin-order-list"></tbody>
+                            </table>
                         </div>
-                        <div class="mb-2">
-                            <label>Price (Rs)</label>
-                            <input type="number" id="prod-price" class="form-control" required>
-                        </div>
-                        <div class="mb-2">
-                            <label>Image URL</label>
-                            <input type="text" id="prod-img" class="form-control" placeholder="https://..." required>
-                            <small class="text-muted">Right click an image online and "Copy Image Link"</small>
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100">Add Product</button>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Product List & Orders -->
-            <div class="col-md-8">
-                <!-- Tabs -->
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item">
-                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#products">Manage Products</button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#orders">View Orders</button>
-                    </li>
-                </ul>
-
-                <div class="tab-content bg-white p-3 border border-top-0">
-                    <!-- Product List Tab -->
-                    <div class="tab-pane fade show active" id="products">
-                        <table class="table">
-                            <thead><tr><th>Img</th><th>Name</th><th>Price</th><th>Action</th></tr></thead>
-                            <tbody id="admin-product-list"></tbody>
-                        </table>
-                    </div>
-
-                    <!-- Orders Tab -->
-                    <div class="tab-pane fade" id="orders">
-                        <table class="table table-striped">
-                            <thead><tr><th>Date</th><th>Customer</th><th>Items</th><th>Total</th></tr></thead>
-                            <tbody id="admin-order-list"></tbody>
-                        </table>
                     </div>
                 </div>
+
+                <!-- 2. Products Tab -->
+                <div class="tab-pane fade" id="products">
+                    <h2>Manage Products</h2>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <div class="card p-3">
+                                <h5>Add New Product</h5>
+                                <form id="add-product-form">
+                                    <input type="text" id="prod-name" class="form-control mb-2" placeholder="Product Name" required>
+                                    <input type="number" id="prod-price" class="form-control mb-2" placeholder="Price (Rs)" required>
+                                    
+                                    <label>Product Image</label>
+                                    <input type="file" id="prod-file" class="form-control mb-2" accept="image/*">
+                                    <div id="upload-progress" class="progress mb-2 d-none" style="height: 5px;">
+                                        <div class="progress-bar" style="width: 0%"></div>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary w-100">Add Product</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="row" id="admin-product-list"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Site Builder Tab -->
+                <div class="tab-pane fade" id="site-settings">
+                    <h2>Website Customization</h2>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card p-4 mb-3">
+                                <h5>General Settings</h5>
+                                <form id="settings-form">
+                                    <label>Store Name</label>
+                                    <input type="text" id="conf-name" class="form-control mb-2">
+                                    
+                                    <label>Brand Color (Navbar/Buttons)</label>
+                                    <input type="color" id="conf-color" class="form-control form-control-color mb-2" value="#0d6efd">
+                                    
+                                    <label>Footer Text</label>
+                                    <input type="text" id="conf-footer" class="form-control mb-2">
+                                    
+                                    <hr>
+                                    <h5>Hero Section</h5>
+                                    <input type="text" id="conf-hero-title" class="form-control mb-2" placeholder="Main Title">
+                                    <input type="text" id="conf-hero-sub" class="form-control mb-2" placeholder="Subtitle">
+
+                                    <button type="submit" class="btn btn-success mt-3">Save Changes</button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="card p-4">
+                                <h5>Add Extra Text Section</h5>
+                                <form id="add-section-form">
+                                    <input type="text" id="sec-title" class="form-control mb-2" placeholder="Section Title (e.g. About Us)">
+                                    <textarea id="sec-content" class="form-control mb-2" rows="3" placeholder="Content..."></textarea>
+                                    <button type="submit" class="btn btn-secondary">Add Section</button>
+                                </form>
+                                <hr>
+                                <h6>Existing Sections:</h6>
+                                <ul id="admin-sections-list" class="list-group"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
